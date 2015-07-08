@@ -1,19 +1,26 @@
 package counter
 
-import "sync/atomic"
+import (
+	"sync"
+	"sync/atomic"
+)
 
 type Counter struct {
 	values map[string]*int64
+	sync.Mutex
 }
 
 // Create a new Counter
 func NewCounter() *Counter {
 	m := make(map[string]*int64)
-	return &Counter{m}
+	return &Counter{values: m}
 }
 
 // Increment the value for the given key
 func (c *Counter) Increment(key string) {
+	c.Lock()
+	defer c.Unlock()
+
 	if _, ok := c.values[key]; !ok {
 		var n int64 = 0
 		c.values[key] = &n
