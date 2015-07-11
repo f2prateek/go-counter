@@ -7,7 +7,7 @@ import (
 )
 
 func TestSingle(t *testing.T) {
-	c := NewCounter()
+	c := New()
 
 	for i := 1; i < 100; i++ {
 		c.Increment("foo")
@@ -16,7 +16,7 @@ func TestSingle(t *testing.T) {
 }
 
 func TestMultiple(t *testing.T) {
-	c := NewCounter()
+	c := New()
 
 	for i := 1; i < 100; i++ {
 		c.Increment("foo")
@@ -27,7 +27,7 @@ func TestMultiple(t *testing.T) {
 }
 
 func TestSimple(t *testing.T) {
-	c := NewCounter()
+	c := New()
 
 	c.Increment("foo")
 	c.Increment("foo")
